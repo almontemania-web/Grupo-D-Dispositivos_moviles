@@ -1,0 +1,7 @@
+{
+  "name": "MedicAlertRD",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
