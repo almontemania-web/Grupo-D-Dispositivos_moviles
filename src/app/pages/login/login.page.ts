@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { SeniorModeService } from '../../services/senior-mode.service';
 import {
   IonContent, IonButton, IonInput, IonItem,
   IonSpinner, IonIcon, AlertController, LoadingController
@@ -23,14 +24,20 @@ export class LoginPage {
   private router = inject(Router);
   private alertCtrl = inject(AlertController);
   private loadingCtrl = inject(LoadingController);
+  private seniorMode = inject(SeniorModeService);
 
   email = '';
   password = '';
   mostrarPassword = false;
   cargando = false;
+  modoAdultoMayor = this.seniorMode.activo;
 
   constructor() {
     addIcons({ heartOutline, eyeOutline, eyeOffOutline, logInOutline, personAddOutline });
+  }
+
+  toggleModoAdultoMayor() {
+    this.modoAdultoMayor = this.seniorMode.toggle();
   }
 
   async ingresar() {

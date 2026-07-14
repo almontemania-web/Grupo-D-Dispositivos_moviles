@@ -72,3 +72,14 @@ Thumbs.db
 # Debug/test scripts and screenshots dropped at repo root during development
 /*.mjs
 /*.png
+
+# Stray Android Studio project accidentally created at repo root (real native
+# project lives in /android)
+/app/
+/build.gradle.kts
+/settings.gradle.kts
+/gradle.properties
+/gradle/
+/gradlew
+/gradlew.bat
+/local.properties

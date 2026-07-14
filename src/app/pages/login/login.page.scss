@@ -183,11 +183,20 @@
   .senior-sub { font-size: 11px; color: #64748B; margin: 0; }
 
   .senior-toggle {
-    width: 46px; height: 26px; background: #0FA3B1; border-radius: 13px;
-    position: relative; flex-shrink: 0;
+    width: 46px; height: 26px; background: #DDE3EA; border-radius: 13px;
+    position: relative; flex-shrink: 0; cursor: pointer;
+    transition: background-color 0.2s;
+
     &::after {
-      content: ''; position: absolute; right: 3px; top: 3px;
+      content: ''; position: absolute; left: 3px; top: 3px;
       width: 20px; height: 20px; background: white; border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      transition: left 0.2s;
+    }
+
+    &.active {
+      background: #0FA3B1;
+      &::after { left: 23px; }
     }
   }
 }

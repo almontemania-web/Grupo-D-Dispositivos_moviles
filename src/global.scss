@@ -58,3 +58,32 @@ ion-menu .menu-icon-wrap {
   justify-content: center !important;
   margin-right: 12px !important;
 }
+
+// ── Modo Adulto Mayor ────────────────────────────────────────────────
+// Agranda texto, botones e íconos en toda la app para mejorar la legibilidad.
+body.senior-mode {
+  font-size: 115%;
+
+  ion-button {
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    font-size: 1.1em;
+  }
+
+  ion-item {
+    --min-height: 54px;
+    font-size: 1.1em;
+  }
+
+  ion-input, ion-label {
+    font-size: 1.1em !important;
+  }
+
+  ion-icon {
+    font-size: 1.15em;
+  }
+
+  button, .card-item, .med-card, .nav-item {
+    font-size: 1.08em;
+  }
+}
