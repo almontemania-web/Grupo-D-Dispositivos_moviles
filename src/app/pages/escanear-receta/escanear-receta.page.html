@@ -1,0 +1,179 @@
+<ion-content class="escanear-content">
+
+  <div class="escanear-header">
+    <div class="back-btn" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>{{ vistaHistorial ? 'Historial de recetas' : 'Escanear receta' }}</h2>
+    <div class="header-right">
+      <div class="reiniciar-btn" *ngIf="!vistaHistorial && paso !== 'captura'" (click)="reiniciar()">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </div>
+      <div class="historial-btn" (click)="toggleVista()">
+        <ion-icon [name]="vistaHistorial ? 'camera-outline' : 'document-text-outline'"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       VISTA ESCANEAR
+  ══════════════════════════════════════════════ -->
+
+  <ng-container *ngIf="!vistaHistorial">
+
+    <!-- PASO 1: CAPTURA -->
+    <div class="paso-container" *ngIf="paso === 'captura'">
+      <div class="ia-badge">
+        <ion-icon name="flash-outline"></ion-icon>
+        Análisis con Inteligencia Artificial
+      </div>
+
+      <div class="upload-zone">
+        <label for="receta-input" class="upload-label">
+          <div class="upload-icon">
+            <ion-icon name="camera-outline"></ion-icon>
+          </div>
+          <h3>Fotografía tu receta</h3>
+          <p>La IA detectará automáticamente los medicamentos, dosis y horarios</p>
+          <div class="upload-btn">
+            <ion-icon name="image-outline"></ion-icon>
+            Seleccionar imagen
+          </div>
+        </label>
+        <input id="receta-input" type="file" accept="image/*"
+               style="display:none" (change)="seleccionarImagen($event)"/>
+      </div>
+
+      <div class="features-list">
+        <div class="feature-item">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>Detecta nombre del medicamento</span>
+        </div>
+        <div class="feature-item">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>Extrae dosis y frecuencia</span>
+        </div>
+        <div class="feature-item">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>Sugiere horarios automaticamente</span>
+        </div>
+        <div class="feature-item">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>Guarda registro en tu historial</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 2: ANALISIS -->
+    <div class="paso-container" *ngIf="paso === 'analisis'">
+      <div class="imagen-preview" *ngIf="imagenBase64">
+        <img [src]="imagenBase64" alt="Receta"/>
+      </div>
+      <div class="analizando-state">
+        <div class="spinner-ring"></div>
+        <h3>Analizando receta...</h3>
+        <p>La IA está leyendo tu receta</p>
+      </div>
+    </div>
+
+    <!-- PASO 3: RESULTADOS -->
+    <div class="paso-container" *ngIf="paso === 'resultados'">
+
+      <div class="imagen-preview small" *ngIf="imagenBase64">
+        <img [src]="imagenBase64" alt="Receta"/>
+        <div class="preview-badge">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          {{ medicamentosDetectados.length }} medicamento(s) detectado(s)
+        </div>
+      </div>
+
+      <div class="resultados-title">Medicamentos detectados</div>
+      <p class="resultados-sub">Selecciona los que deseas agregar</p>
+
+      <div class="med-detectado" *ngFor="let med of medicamentosDetectados; let i = index"
+           [class.seleccionado]="medicamentosSeleccionados[i]"
+           (click)="toggleSeleccion(i)">
+        <div class="med-check">
+          <ion-icon [name]="medicamentosSeleccionados[i] ? 'checkmark-circle-outline' : 'close-circle-outline'"
+                    [class.checked]="medicamentosSeleccionados[i]"
+                    [class.unchecked]="!medicamentosSeleccionados[i]">
+          </ion-icon>
+        </div>
+        <div class="med-det-info">
+          <h4>{{ med.nombre }}</h4>
+          <div class="med-det-tags">
+            <span class="det-tag">{{ med.dosis }}</span>
+            <span class="det-tag">{{ med.frecuencia }}</span>
+            <span class="det-tag" *ngFor="let h of med.horarios">{{ h }}</span>
+          </div>
+          <p class="det-instrucciones" *ngIf="med.instrucciones">{{ med.instrucciones }}</p>
+        </div>
+      </div>
+
+      <div class="btn-agregar" (click)="agregarSeleccionados()">
+        <ion-icon name="medkit-outline"></ion-icon>
+        Agregar y guardar en historial
+      </div>
+
+    </div>
+
+  </ng-container>
+
+  <!-- ══════════════════════════════════════════════
+       VISTA HISTORIAL
+  ══════════════════════════════════════════════ -->
+
+  <div class="historial-body" *ngIf="vistaHistorial">
+
+    <div class="historial-empty" *ngIf="historial.length === 0">
+      <ion-icon name="document-text-outline"></ion-icon>
+      <h3>Sin registros aún</h3>
+      <p>Escanea tu primera receta y aparecerá aquí</p>
+      <div class="btn-ir-escanear" (click)="toggleVista()">
+        <ion-icon name="camera-outline"></ion-icon>
+        Escanear receta
+      </div>
+    </div>
+
+    <div class="btn-ver-meds" (click)="volver()" *ngIf="historial.length > 0">
+      <ion-icon name="medkit-outline"></ion-icon>
+      Ver mis medicamentos
+    </div>
+
+    <div class="receta-card" *ngFor="let r of historial" (click)="toggleRegistro(r.id)">
+
+      <div class="receta-card-header">
+        <div class="receta-icon-wrap">
+          <ion-icon name="document-text-outline"></ion-icon>
+        </div>
+        <div class="receta-meta">
+          <span class="receta-fecha">{{ getFecha(r.fecha) }}</span>
+          <div class="receta-badges">
+            <span class="badge-detectado">{{ r.totalDetectados }} detectados</span>
+            <span class="badge-agregado">{{ r.totalAgregados }} agregados</span>
+          </div>
+        </div>
+        <ion-icon
+          [name]="registroExpandido === r.id ? 'checkmark-circle-outline' : 'time-outline'"
+          class="receta-expand-icon">
+        </ion-icon>
+      </div>
+
+      <!-- Detalle expandible -->
+      <div class="receta-detalle" *ngIf="registroExpandido === r.id">
+        <div class="receta-med-item" *ngFor="let m of r.medicamentos">
+          <div class="rmi-left">
+            <span class="rmi-nombre">{{ m.nombre }}</span>
+            <span class="rmi-dosis">{{ m.dosis }} · {{ m.frecuencia }}</span>
+          </div>
+          <span class="rmi-status" [class.agregado]="m.agregado" [class.omitido]="!m.agregado">
+            {{ m.agregado ? 'Agregado' : 'Omitido' }}
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

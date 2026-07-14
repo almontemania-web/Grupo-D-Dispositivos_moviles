@@ -1,0 +1,141 @@
+<ion-content class="citas-content">
+
+  <div class="citas-header">
+    <div class="back-btn" (click)="volverHome()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>Citas médicas</h2>
+    <div class="add-btn" (click)="mostrarForm = !mostrarForm; lugaresResultados = []">
+      <ion-icon [name]="mostrarForm ? 'close-outline' : 'add-outline'"></ion-icon>
+    </div>
+  </div>
+
+  <!-- ── Formulario nueva cita ── -->
+  <div class="form-nueva" *ngIf="mostrarForm">
+    <div class="form-title">Nueva cita</div>
+
+    <div class="form-group">
+      <label>Doctor *</label>
+      <input class="inp" placeholder="Nombre del doctor" [(ngModel)]="nueva.doctor"/>
+    </div>
+
+    <div class="form-group">
+      <label>Especialidad</label>
+      <input class="inp" placeholder="Ej: Cardiología, Medicina general" [(ngModel)]="nueva.especialidad"/>
+    </div>
+
+    <!-- Fecha con input nativo -->
+    <div class="form-group">
+      <label>Fecha *</label>
+      <div class="native-input-wrap">
+        <ion-icon name="calendar-outline" class="inp-icon"></ion-icon>
+        <input type="date" class="native-inp"
+          [(ngModel)]="nueva.fecha"
+          [min]="minFecha" />
+      </div>
+    </div>
+
+    <!-- Hora con input nativo -->
+    <div class="form-group">
+      <label>Hora *</label>
+      <div class="native-input-wrap">
+        <ion-icon name="time-outline" class="inp-icon"></ion-icon>
+        <input type="time" class="native-inp"
+          [(ngModel)]="nueva.hora" />
+      </div>
+    </div>
+
+    <!-- Búsqueda de hospital / clínica -->
+    <div class="lugar-section">
+      <div class="lugar-header">
+        <span class="lugar-label">Hospital / Clínica</span>
+        <div class="btn-cerca" (click)="buscarCerca()">
+          <ion-icon name="locate-outline"></ion-icon>
+          Cerca de mí
+        </div>
+      </div>
+
+      <div class="search-wrap">
+        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+        <input
+          class="inp-search"
+          placeholder="Buscar hospital o clínica en RD..."
+          [(ngModel)]="busquedaLugar"
+          (ngModelChange)="onBusquedaChange()"/>
+      </div>
+
+      <div class="buscando-row" *ngIf="buscando">
+        <div class="spinner"></div>
+        <span>Buscando centros de salud...</span>
+      </div>
+
+      <div class="lugares-lista" *ngIf="lugaresResultados.length > 0">
+        <div class="lugar-item" *ngFor="let l of lugaresResultados" (click)="seleccionarLugar(l)">
+          <div class="lugar-icon-wrap">
+            <ion-icon name="business-outline"></ion-icon>
+          </div>
+          <div class="lugar-texto">
+            <span class="lugar-nombre">{{ l.nombre }}</span>
+            <span class="lugar-dir">{{ l.direccion }}</span>
+          </div>
+          <div class="lugar-right">
+            <span class="lugar-dist" *ngIf="l.distancia != null">
+              {{ l.distancia | number:'1.1-1' }} km
+            </span>
+            <div class="mapa-btn" (click)="abrirMapa(l, $event)">
+              <ion-icon name="map-outline"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lugar-seleccionado" *ngIf="nueva.lugar && lugaresResultados.length === 0 && !buscando">
+        <ion-icon name="location-outline"></ion-icon>
+        {{ nueva.lugar }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Notas</label>
+      <input class="inp" placeholder="Notas adicionales" [(ngModel)]="nueva.notas"/>
+    </div>
+
+    <div class="btn-guardar-cita" (click)="guardarCita()">
+      <ion-icon name="calendar-outline"></ion-icon>
+      Guardar cita
+    </div>
+  </div>
+
+  <!-- ── Lista de citas ── -->
+  <div class="citas-body">
+
+    <div class="empty-state" *ngIf="!cargando && citas.length === 0 && !mostrarForm">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <h3>Sin citas programadas</h3>
+      <p>Toca el botón + para agregar una cita</p>
+    </div>
+
+    <div class="cita-card" *ngFor="let cita of citas">
+      <div class="cita-fecha-col">
+        <span class="cita-dia">{{ cita.fecha + 'T12:00:00' | date:'dd' }}</span>
+        <span class="cita-mes">{{ cita.fecha + 'T12:00:00' | date:'MMM' }}</span>
+      </div>
+      <div class="cita-info">
+        <h4>Dr. {{ cita.doctor }}</h4>
+        <p *ngIf="cita.especialidad">
+          <ion-icon name="medkit-outline"></ion-icon> {{ cita.especialidad }}
+        </p>
+        <p><ion-icon name="time-outline"></ion-icon> {{ cita.hora }}</p>
+        <p *ngIf="cita.lugar">
+          <ion-icon name="location-outline"></ion-icon> {{ cita.lugar }}
+        </p>
+        <p *ngIf="cita.notas" class="cita-notas">{{ cita.notas }}</p>
+      </div>
+      <div class="cita-delete" (click)="eliminarCita(cita)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

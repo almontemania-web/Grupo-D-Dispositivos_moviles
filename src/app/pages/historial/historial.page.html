@@ -1,0 +1,58 @@
+<ion-content class="historial-content">
+
+  <div class="hist-header">
+    <div class="back-btn" (click)="volverHome()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>Historial médico</h2>
+    <div class="refresh-btn" (click)="refrescar()">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </div>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="hist-stats">
+    <div class="stat-card blue">
+      <span class="stat-num">{{ totalMeds }}</span>
+      <span class="stat-label">Medicamentos</span>
+    </div>
+    <div class="stat-card teal">
+      <span class="stat-num">{{ totalCitas }}</span>
+      <span class="stat-label">Citas</span>
+    </div>
+    <div class="stat-card green">
+      <span class="stat-num">{{ totalTomas }}</span>
+      <span class="stat-label">Dosis tomadas</span>
+    </div>
+    <div class="stat-card gray">
+      <span class="stat-num">{{ historial.length }}</span>
+      <span class="stat-label">Total registros</span>
+    </div>
+  </div>
+
+  <div class="hist-body">
+
+    <div class="empty-state" *ngIf="!cargando && historial.length === 0">
+      <ion-icon name="document-text-outline"></ion-icon>
+      <h3>Sin registros</h3>
+      <p>Aquí aparecerán tus medicamentos, citas y dosis tomadas</p>
+    </div>
+
+    <div class="hist-entry" *ngFor="let item of historial">
+      <div class="entry-icon-wrap" [style.background]="getColor(item) + '22'">
+        <ion-icon [name]="getIcono(item)" [style.color]="getColor(item)"></ion-icon>
+      </div>
+      <div class="entry-info">
+        <div class="entry-tipo" [style.color]="getColor(item)">{{ getTipoLabel(item.tipo) }}</div>
+        <h5>{{ item.titulo }}</h5>
+        <p>{{ item.descripcion }}</p>
+      </div>
+      <div class="entry-fecha">
+        <span class="fecha-dia">{{ getFecha(item.fecha) }}</span>
+        <span class="fecha-hora">{{ getHora(item.fecha) }}</span>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

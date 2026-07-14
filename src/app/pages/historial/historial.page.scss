@@ -1,0 +1,63 @@
+.historial-content { --background: #F8FAFC; }
+
+.hist-header {
+  background: linear-gradient(90deg, #0D3B8E, #1E5BB8);
+  padding: 50px 16px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+  h2 { font-size: 18px; font-weight: 700; color: white; margin: 0; flex: 1; text-align: center; }
+
+  .back-btn, .refresh-btn {
+    width: 34px; height: 34px; background: rgba(255,255,255,0.2); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    ion-icon { font-size: 20px; color: white; }
+  }
+}
+
+.hist-stats {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; padding: 14px;
+
+  .stat-card {
+    border-radius: 14px; padding: 14px; text-align: center;
+    border: 1px solid #DDE3EA; background: white;
+    .stat-num { font-size: 28px; font-weight: 800; color: #334155; display: block; }
+    .stat-label { font-size: 11px; font-weight: 600; display: block; margin-top: 2px; }
+    &.blue   { background: #EDF5FF; border-color: rgba(13,59,142,0.2); .stat-label { color: #0D3B8E; } }
+    &.teal   { background: #E0F7FA; border-color: rgba(15,163,177,0.2); .stat-label { color: #0FA3B1; } }
+    &.green  { background: #E8F5E9; border-color: #C8E6C9; .stat-label { color: #4CAF50; } }
+    &.gray   { background: #F8FAFC; border-color: #DDE3EA; .stat-label { color: #64748B; } }
+  }
+}
+
+.hist-body { padding: 0 14px 40px; }
+
+.hist-entry {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px; background: white; border-radius: 14px;
+  margin-bottom: 8px; border: 1px solid #DDE3EA;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+
+  .entry-icon-wrap {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    ion-icon { font-size: 20px; }
+  }
+
+  .entry-info { flex: 1; min-width: 0;
+    .entry-tipo { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 1px; }
+    h5 { font-size: 14px; color: #334155; font-weight: 600; margin: 0 0 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    p  { font-size: 11px; color: #64748B; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  }
+
+  .entry-fecha {
+    display: flex; flex-direction: column; align-items: flex-end; flex-shrink: 0;
+    .fecha-dia  { font-size: 11px; color: #64748B; font-weight: 500; text-align: right; }
+    .fecha-hora { font-size: 10px; color: #94A3B8; text-align: right; }
+  }
+}
+
+.empty-state {
+  text-align: center; padding: 60px 20px;
+  ion-icon { font-size: 52px; color: #DDE3EA; display: block; margin: 0 auto 16px; }
+  h3 { font-size: 17px; color: #64748B; font-weight: 600; margin: 0 0 8px; }
+  p  { font-size: 13px; color: #94A3B8; margin: 0; }
+}

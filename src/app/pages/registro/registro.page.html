@@ -1,0 +1,113 @@
+<ion-content class="registro-content">
+  <div class="registro-container">
+
+    <div class="header-section">
+      <ion-icon name="arrow-back-outline" class="back-icon" (click)="irLogin()"></ion-icon>
+      <div class="logo-icon">
+        <ion-icon name="heart-outline"></ion-icon>
+      </div>
+      <h1>Crear cuenta</h1>
+      <p>Regístrate en MedicAlert RD</p>
+    </div>
+
+    <div class="form-section">
+
+      <!-- Nombre -->
+      <div class="input-group">
+        <label>Nombre <span class="req">*</span></label>
+        <ion-item lines="none" class="input-item">
+          <ion-input type="text" placeholder="Jean" [(ngModel)]="nombre"></ion-input>
+        </ion-item>
+      </div>
+
+      <!-- Apellido -->
+      <div class="input-group">
+        <label>Apellido <span class="req">*</span></label>
+        <ion-item lines="none" class="input-item">
+          <ion-input type="text" placeholder="Rodríguez" [(ngModel)]="apellido"></ion-input>
+        </ion-item>
+      </div>
+
+      <!-- Email -->
+      <div class="input-group">
+        <label>Correo electrónico <span class="req">*</span></label>
+        <ion-item lines="none" class="input-item">
+          <ion-input type="email" placeholder="tu@correo.com"
+            [(ngModel)]="email" autocomplete="email">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="input-group">
+        <label>Contraseña <span class="req">*</span></label>
+        <ion-item lines="none" class="input-item">
+          <ion-input [type]="mostrarPassword ? 'text' : 'password'"
+            placeholder="Mínimo 6 caracteres" [(ngModel)]="password">
+          </ion-input>
+          <ion-icon slot="end" [name]="mostrarPassword ? 'eye-off-outline' : 'eye-outline'"
+            (click)="mostrarPassword = !mostrarPassword" class="eye-icon">
+          </ion-icon>
+        </ion-item>
+      </div>
+
+      <!-- Confirmar Contraseña -->
+      <div class="input-group">
+        <label>Confirmar contraseña <span class="req">*</span></label>
+        <ion-item lines="none" class="input-item">
+          <ion-input [type]="mostrarPassword ? 'text' : 'password'"
+            placeholder="Repite tu contraseña" [(ngModel)]="confirmarPassword">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div class="section-divider">
+        <span>Información del seguro médico</span>
+      </div>
+
+      <!-- Fecha de nacimiento - input nativo -->
+      <div class="input-group">
+        <label>Fecha de nacimiento</label>
+        <div class="native-date-wrap">
+          <input
+            type="date"
+            class="native-date-inp"
+            [(ngModel)]="fechaNacimiento"
+            [max]="maxFecha"
+            placeholder="dd/mm/aaaa" />
+        </div>
+      </div>
+
+      <!-- Plan de salud -->
+      <div class="input-group">
+        <label>Plan de salud / ARS</label>
+        <ion-item lines="none" class="input-item">
+          <ion-select placeholder="Seleccionar plan" [(ngModel)]="planSalud"
+            interface="action-sheet" cancelText="Cancelar">
+            <ion-select-option *ngFor="let p of planesARS" [value]="p">{{ p }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <!-- No. Afiliado -->
+      <div class="input-group">
+        <label>No. Afiliado / Carnet</label>
+        <ion-item lines="none" class="input-item">
+          <ion-input type="text" placeholder="Número de afiliado" [(ngModel)]="noAfiliado"></ion-input>
+        </ion-item>
+      </div>
+
+      <ion-button expand="block" class="btn-registro" (click)="registrarse()" [disabled]="cargando">
+        <ion-spinner *ngIf="cargando" name="crescent"></ion-spinner>
+        <span *ngIf="!cargando">Crear cuenta</span>
+      </ion-button>
+
+      <div class="divider"><span>¿Ya tienes cuenta?</span></div>
+
+      <ion-button expand="block" fill="outline" class="btn-login" (click)="irLogin()">
+        Iniciar sesión
+      </ion-button>
+
+    </div>
+  </div>
+</ion-content>

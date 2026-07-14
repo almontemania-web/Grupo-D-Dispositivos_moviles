@@ -1,0 +1,125 @@
+.registro-content { --background: #F8FAFC; }
+
+.registro-container {
+  display: flex; flex-direction: column;
+  min-height: 100vh; padding: 0;
+}
+
+.header-section {
+  background: linear-gradient(135deg, #0FA3B1, #0D3B8E);
+  padding: 52px 24px 30px;
+  text-align: center; position: relative;
+
+  .back-icon {
+    position: absolute; left: 16px; top: 52px;
+    font-size: 24px; color: rgba(255,255,255,0.8); cursor: pointer;
+  }
+
+  .logo-icon {
+    width: 60px; height: 60px; background: rgba(255,255,255,0.2);
+    border-radius: 18px; display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 12px;
+    ion-icon { font-size: 30px; color: white; }
+  }
+
+  h1 { font-size: 26px; font-weight: 800; color: white; margin: 0 0 4px; }
+  p { color: rgba(255,255,255,0.75); font-size: 13px; margin: 0; }
+}
+
+.form-section {
+  background: white; border-radius: 24px 24px 0 0;
+  margin-top: -20px; padding: 24px 24px 40px; flex: 1;
+
+  .section-divider {
+    display: flex; align-items: center; gap: 10px; margin: 18px 0 14px;
+    &::before, &::after { content: ''; flex: 1; height: 1px; background: #F1F5F9; }
+    span { font-size: 11px; font-weight: 700; color: #0D3B8E; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+  }
+
+  .input-group {
+    margin-bottom: 14px;
+    label {
+      display: block; color: #64748B; font-size: 12px;
+      font-weight: 600; margin-bottom: 6px; padding-left: 4px;
+      .req { color: #D32F2F; margin-left: 2px; }
+    }
+  }
+
+  .picker-trigger {
+    display: flex; align-items: center; gap: 10px;
+    background: #F8FAFC; border: 1.5px solid #DDE3EA; border-radius: 12px;
+    padding: 12px 14px; cursor: pointer;
+    ion-icon:first-child { font-size: 18px; color: #0D3B8E; flex-shrink: 0; }
+    span { flex: 1; font-size: 14px; color: #334155;
+      &.placeholder { color: #94A3B8; }
+    }
+    .chev { font-size: 16px; color: #94A3B8; transition: transform 0.2s; flex-shrink: 0;
+      &.open { transform: rotate(180deg); }
+    }
+  }
+
+  .picker-wrap {
+    border: 1.5px solid #DDE3EA; border-radius: 12px;
+    overflow: hidden; margin-top: 6px;
+    ion-datetime { --background: white; }
+
+    .picker-actions {
+      display: flex; gap: 8px; padding: 10px 12px;
+      border-top: 1px solid #F1F5F9; background: white;
+
+      .btn-picker-cancel {
+        flex: 1; padding: 10px; border-radius: 10px; border: 1.5px solid #DDE3EA;
+        background: white; color: #64748B; font-size: 14px; font-weight: 600;
+        cursor: pointer; font-family: inherit;
+      }
+
+      .btn-picker-done {
+        flex: 1; padding: 10px; border-radius: 10px; border: none;
+        background: #0D3B8E; color: white; font-size: 14px; font-weight: 700;
+        cursor: pointer; font-family: inherit;
+      }
+    }
+  }
+
+  .input-item {
+    --background: #F8FAFC; --border-radius: 12px;
+    --color: #334155; --placeholder-color: #94A3B8;
+    --padding-start: 16px; --padding-end: 16px;
+    border-radius: 12px; border: 1.5px solid #DDE3EA;
+  }
+
+  .eye-icon { color: #64748B; font-size: 20px; cursor: pointer; }
+
+  .btn-registro {
+    --background: #0D3B8E; --border-radius: 14px;
+    --color: white; height: 56px;
+    margin-top: 24px; font-size: 16px; font-weight: 700;
+  }
+
+  .divider {
+    text-align: center; margin: 20px 0;
+    span { color: #94A3B8; font-size: 13px; }
+  }
+
+  .btn-login {
+    --border-radius: 14px; --color: #0D3B8E;
+    --border-color: rgba(13,59,142,0.3); height: 52px; font-size: 15px;
+  }
+
+  .native-date-wrap {
+    display: block;
+  }
+
+  .native-date-inp {
+    width: 100%; display: block; box-sizing: border-box;
+    background: #F8FAFC; border: 1.5px solid #DDE3EA; border-radius: 12px;
+    padding: 13px 16px; color: #334155; font-size: 15px;
+    font-family: inherit; outline: none;
+    -webkit-appearance: none; appearance: none;
+    &:focus { border-color: #0D3B8E; }
+    &::-webkit-calendar-picker-indicator {
+      filter: invert(28%) sepia(60%) saturate(600%) hue-rotate(195deg);
+      cursor: pointer; width: 20px; height: 20px;
+    }
+  }
+}

@@ -1,0 +1,228 @@
+.escanear-content { --background: #F8FAFC; }
+
+.escanear-header {
+  background: linear-gradient(90deg, #0D3B8E, #1E5BB8);
+  padding: 50px 16px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+
+  h2 { font-size: 18px; font-weight: 700; color: white; margin: 0; flex: 1; padding: 0 10px; }
+
+  .back-btn {
+    width: 34px; height: 34px; background: rgba(255,255,255,0.2); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+    ion-icon { font-size: 20px; color: white; }
+  }
+
+  .header-right {
+    display: flex; gap: 8px; flex-shrink: 0;
+
+    .reiniciar-btn, .historial-btn {
+      width: 34px; height: 34px; background: rgba(255,255,255,0.15); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      ion-icon { font-size: 18px; color: white; }
+    }
+
+    .historial-btn {
+      background: rgba(255,255,255,0.25);
+      ion-icon { color: white; }
+    }
+  }
+}
+
+.paso-container { padding: 16px; }
+
+.ia-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #EDF5FF; border: 1px solid rgba(13,59,142,0.2);
+  border-radius: 20px; padding: 6px 14px; font-size: 12px;
+  color: #0D3B8E; font-weight: 600; margin-bottom: 20px;
+  ion-icon { font-size: 14px; }
+}
+
+.upload-zone {
+  background: #F8FAFC; border: 2px dashed #DDE3EA;
+  border-radius: 20px; padding: 32px 20px; text-align: center;
+  margin-bottom: 24px; cursor: pointer; transition: border-color 0.2s;
+
+  &:hover { border-color: rgba(13,59,142,0.4); }
+
+  .upload-label { cursor: pointer; display: block; }
+
+  .upload-icon {
+    width: 72px; height: 72px; background: #EDF5FF; border-radius: 20px;
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+    ion-icon { font-size: 36px; color: #0D3B8E; }
+  }
+
+  h3 { font-size: 18px; font-weight: 700; color: #334155; margin: 0 0 8px; }
+  p { font-size: 13px; color: #94A3B8; margin: 0 0 20px; line-height: 1.5; }
+
+  .upload-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #0D3B8E; color: white;
+    padding: 12px 24px; border-radius: 12px;
+    font-weight: 700; font-size: 14px;
+    ion-icon { font-size: 18px; }
+  }
+}
+
+.features-list {
+  .feature-item {
+    display: flex; align-items: center; gap: 10px; padding: 8px 0;
+    border-bottom: 1px solid #F1F5F9;
+    &:last-child { border-bottom: none; }
+    ion-icon { font-size: 18px; color: #4CAF50; flex-shrink: 0; }
+    span { font-size: 13px; color: #64748B; }
+  }
+}
+
+.imagen-preview {
+  border-radius: 14px; overflow: hidden; margin-bottom: 16px; position: relative;
+  img { width: 100%; height: 200px; object-fit: cover; display: block; }
+  &.small img { height: 120px; }
+
+  .preview-badge {
+    position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.6); color: #4CAF50;
+    padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; gap: 4px; white-space: nowrap;
+    ion-icon { font-size: 14px; }
+  }
+}
+
+.analizando-state {
+  text-align: center; padding: 40px 20px;
+
+  .spinner-ring {
+    width: 60px; height: 60px; border: 3px solid rgba(13,59,142,0.15);
+    border-top-color: #0D3B8E; border-radius: 50%;
+    margin: 0 auto 20px; animation: spin 1s linear infinite;
+  }
+
+  h3 { font-size: 18px; color: #334155; font-weight: 600; margin: 0 0 8px; }
+  p { font-size: 13px; color: #94A3B8; margin: 0; }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.resultados-title { font-size: 16px; font-weight: 700; color: #334155; margin-bottom: 4px; }
+.resultados-sub { font-size: 13px; color: #64748B; margin: 0 0 16px; }
+
+.med-detectado {
+  background: white; border: 1px solid #DDE3EA; border-radius: 14px;
+  padding: 14px; margin-bottom: 10px; display: flex; gap: 12px;
+  cursor: pointer; transition: border-color 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+
+  &.seleccionado { border-color: rgba(76,175,80,0.5); background: rgba(76,175,80,0.04); }
+
+  .med-check {
+    flex-shrink: 0; padding-top: 2px;
+    ion-icon {
+      font-size: 22px;
+      &.checked { color: #4CAF50; }
+      &.unchecked { color: #DDE3EA; }
+    }
+  }
+
+  .med-det-info {
+    flex: 1;
+    h4 { font-size: 14px; color: #334155; font-weight: 600; margin: 0 0 8px; }
+
+    .med-det-tags {
+      display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 6px;
+      .det-tag {
+        background: #EDF5FF; border: 1px solid rgba(13,59,142,0.2);
+        border-radius: 20px; padding: 3px 10px; font-size: 11px; color: #0D3B8E;
+      }
+    }
+
+    .det-instrucciones { font-size: 12px; color: #64748B; margin: 0; font-style: italic; }
+  }
+}
+
+.btn-agregar {
+  background: linear-gradient(90deg, #0D3B8E, #1E5BB8); color: white;
+  border-radius: 14px; padding: 16px; text-align: center;
+  font-size: 15px; font-weight: 700; cursor: pointer;
+  margin-top: 8px; margin-bottom: 40px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  ion-icon { font-size: 20px; }
+}
+
+.historial-body { padding: 14px; }
+
+.historial-empty {
+  text-align: center; padding: 60px 20px;
+  ion-icon { font-size: 52px; color: #DDE3EA; display: block; margin: 0 auto 16px; }
+  h3 { font-size: 17px; color: #64748B; font-weight: 600; margin: 0 0 8px; }
+  p  { font-size: 13px; color: #94A3B8; margin: 0 0 24px; }
+}
+
+.btn-ir-escanear {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #EDF5FF; border: 1px solid rgba(13,59,142,0.2);
+  color: #0D3B8E; font-size: 14px; font-weight: 600;
+  padding: 11px 22px; border-radius: 12px; cursor: pointer;
+  ion-icon { font-size: 18px; }
+}
+
+.btn-ver-meds {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(76,175,80,0.08); border: 1px solid rgba(76,175,80,0.25);
+  color: #2E7D32; font-size: 14px; font-weight: 600;
+  padding: 13px; border-radius: 12px; cursor: pointer; margin-bottom: 14px;
+  ion-icon { font-size: 18px; }
+}
+
+.receta-card {
+  background: white; border: 1px solid #DDE3EA; border-radius: 14px;
+  margin-bottom: 10px; overflow: hidden; cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  &:active { background: #F8FAFC; }
+}
+
+.receta-card-header {
+  display: flex; align-items: center; gap: 12px; padding: 14px;
+
+  .receta-icon-wrap {
+    width: 40px; height: 40px; background: #EDF5FF; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    ion-icon { font-size: 20px; color: #0D3B8E; }
+  }
+
+  .receta-meta {
+    flex: 1; min-width: 0;
+    .receta-fecha { display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 5px; }
+
+    .receta-badges {
+      display: flex; gap: 6px;
+      .badge-detectado, .badge-agregado {
+        font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px;
+      }
+      .badge-detectado { background: #EDF5FF; color: #0D3B8E; }
+      .badge-agregado { background: rgba(76,175,80,0.1); color: #2E7D32; }
+    }
+  }
+
+  .receta-expand-icon { font-size: 18px; color: #94A3B8; flex-shrink: 0; }
+}
+
+.receta-detalle { border-top: 1px solid #F1F5F9; padding: 10px 14px 14px; }
+
+.receta-med-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 0; border-bottom: 1px solid #F8FAFC;
+  &:last-child { border-bottom: none; }
+
+  .rmi-left {
+    .rmi-nombre { display: block; font-size: 13px; font-weight: 600; color: #334155; }
+    .rmi-dosis { display: block; font-size: 11px; color: #64748B; margin-top: 1px; }
+  }
+
+  .rmi-status {
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 10px;
+    &.agregado { background: rgba(76,175,80,0.1); color: #2E7D32; }
+    &.omitido { background: #F1F5F9; color: #94A3B8; }
+  }
+}

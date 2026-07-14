@@ -1,0 +1,136 @@
+<ion-content class="carne-content">
+
+  <div class="carne-header">
+    <div class="back-btn" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>Carné Digital</h2>
+    <div class="share-btn" (click)="compartir()">
+      <ion-icon name="share-outline"></ion-icon>
+    </div>
+  </div>
+
+  <div class="carne-body" *ngIf="!cargando">
+
+    <!-- ── Tarjeta principal ── -->
+    <div class="carne-card">
+      <div class="card-header">
+        <div class="card-logo">
+          <ion-icon name="heart-outline"></ion-icon>
+          <span>MedicAlert <strong>RD</strong></span>
+        </div>
+        <div class="card-type">CARNÉ MÉDICO</div>
+      </div>
+
+      <div class="card-avatar-section">
+        <div class="card-avatar">{{ iniciales }}</div>
+        <div class="card-name-info">
+          <h3>{{ nombreCompleto }}</h3>
+          <p>{{ emailUsuario }}</p>
+          <div class="blood-type">
+            <ion-icon name="heart-outline"></ion-icon>
+            {{ perfil?.tipoSanguineo || 'N/A' }}
+          </div>
+        </div>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <!-- Grid de datos del carnet -->
+      <div class="card-info-grid">
+        <div class="info-item">
+          <span class="info-label">Plan de Salud</span>
+          <span class="info-value">{{ usuario?.planSalud || 'No registrado' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">No. Afiliado</span>
+          <span class="info-value">{{ usuario?.noAfiliado || 'N/A' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">F. Nacimiento</span>
+          <span class="info-value">{{ formatearFecha(usuario?.fechaNacimiento || '') }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Estado</span>
+          <div class="vigente-badge" [class.activo]="usuario?.vigente !== false">
+            <ion-icon [name]="usuario?.vigente !== false ? 'checkmark-circle-outline' : 'close-circle-outline'"></ion-icon>
+            {{ usuario?.vigente !== false ? 'Vigente' : 'No vigente' }}
+          </div>
+        </div>
+      </div>
+
+      <div class="card-fecha">
+        <ion-icon name="calendar-outline"></ion-icon>
+        Emitido: {{ getFechaHoy() }}
+      </div>
+    </div>
+
+    <!-- ── Secciones médicas ── -->
+    <div class="info-section">
+
+      <div class="info-card red">
+        <div class="info-card-title">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          Alergias
+        </div>
+        <div class="chips-row" *ngIf="perfil?.alergias && perfil!.alergias.length > 0">
+          <span class="chip red" *ngFor="let a of perfil?.alergias">{{ a }}</span>
+        </div>
+        <p class="no-data" *ngIf="!perfil?.alergias || perfil!.alergias.length === 0">
+          Sin alergias registradas
+        </p>
+      </div>
+
+      <div class="info-card blue">
+        <div class="info-card-title">
+          <ion-icon name="medkit-outline"></ion-icon>
+          Condiciones médicas
+        </div>
+        <div class="chips-row" *ngIf="perfil?.enfermedades && perfil!.enfermedades.length > 0">
+          <span class="chip blue" *ngFor="let e of perfil?.enfermedades">{{ e }}</span>
+        </div>
+        <p class="no-data" *ngIf="!perfil?.enfermedades || perfil!.enfermedades.length === 0">
+          Sin condiciones registradas
+        </p>
+      </div>
+
+      <div class="info-card green">
+        <div class="info-card-title">
+          <ion-icon name="medkit-outline"></ion-icon>
+          Medicamentos activos
+        </div>
+        <div class="med-list" *ngIf="medicamentosActivos.length > 0">
+          <div class="med-item" *ngFor="let med of medicamentosActivos">
+            <span class="med-name">{{ med.nombre }}</span>
+            <span class="med-dose">{{ med.dosis }}</span>
+          </div>
+        </div>
+        <p class="no-data" *ngIf="medicamentosActivos.length === 0">Sin medicamentos activos</p>
+      </div>
+
+      <div class="info-card orange">
+        <div class="info-card-title">
+          <ion-icon name="call-outline"></ion-icon>
+          Contacto de emergencia
+        </div>
+        <div class="contact-info" *ngIf="perfil?.contactoEmergenciaNombre">
+          <p class="contact-name">{{ perfil?.contactoEmergenciaNombre }}</p>
+          <p class="contact-tel">{{ perfil?.contactoEmergenciaTelefono }}</p>
+        </div>
+        <p class="no-data" *ngIf="!perfil?.contactoEmergenciaNombre">Sin contacto registrado</p>
+      </div>
+
+    </div>
+
+    <div class="share-section" (click)="compartir()">
+      <ion-icon name="share-outline"></ion-icon>
+      Compartir carné médico
+    </div>
+
+  </div>
+
+  <div class="loading-state" *ngIf="cargando">
+    <p>Cargando carné...</p>
+  </div>
+
+</ion-content>

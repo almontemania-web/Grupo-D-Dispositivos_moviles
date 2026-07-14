@@ -1,0 +1,85 @@
+.home-content { --background: #F8FAFC; }
+
+.home-header {
+  background: linear-gradient(90deg, #0D3B8E, #1E5BB8);
+  padding: 50px 16px 20px;
+  display: flex; align-items: center; gap: 12px;
+
+  .menu-btn { --color: rgba(255,255,255,0.8); }
+  .header-center { flex: 1; }
+  .greeting-sub { font-size: 12px; color: rgba(255,255,255,0.7); margin: 0; }
+  .greeting-name { font-size: 20px; font-weight: 700; color: white; margin: 0; }
+
+  .header-avatar {
+    .avatar-img {
+      width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.4);
+    }
+    .avatar-circle {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: #0FA3B1; display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 18px; color: white;
+    }
+  }
+}
+
+.home-body { padding: 16px 16px 100px; }
+
+.card-item {
+  display: flex; align-items: center; gap: 14px;
+  background: white; border-radius: 16px;
+  padding: 16px; margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid #DDE3EA; cursor: pointer;
+
+  .card-icon {
+    width: 50px; height: 50px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+    &.med { background: #E8F5E9; }
+    &.cita { background: #E3F2FD; }
+    &.record { background: #FFF3E0; }
+    &.emerg { background: #FFEBEE; }
+  }
+
+  .card-info { flex: 1; }
+
+  .card-label {
+    font-size: 11px; color: #64748B; margin: 0 0 2px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .card-title { font-size: 15px; font-weight: 700; color: #334155; margin: 0 0 2px; }
+  .card-sub { font-size: 12px; color: #64748B; margin: 0; }
+
+  .card-action .tomar-btn {
+    background: #4CAF50; color: white; font-size: 11px; font-weight: 700;
+    padding: 4px 10px; border-radius: 20px;
+  }
+
+  .card-arrow { font-size: 18px; color: #DDE3EA; }
+}
+
+.emerg-card { border-left: 4px solid #D32F2F !important; }
+
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: white; border-top: 1px solid #DDE3EA;
+  display: flex; padding: 8px 0 16px; z-index: 100;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+
+  .nav-item {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; gap: 3px; cursor: pointer; padding: 4px 0;
+    ion-icon { font-size: 22px; color: #94A3B8; }
+    span { font-size: 10px; color: #94A3B8; font-weight: 500; }
+    &.active {
+      ion-icon { color: #0D3B8E; }
+      span { color: #0D3B8E; font-weight: 700; }
+    }
+    &.emerg {
+      ion-icon { color: #D32F2F; }
+      span { color: #D32F2F; }
+    }
+  }
+}

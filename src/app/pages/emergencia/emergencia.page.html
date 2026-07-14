@@ -1,0 +1,65 @@
+<ion-content class="emergencia-content">
+
+  <div class="emerg-header">
+    <div class="back-btn" (click)="volverHome()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>Emergencia</h2>
+    <div style="width:34px"></div>
+  </div>
+
+  <div class="emerg-body">
+
+    <div class="sos-main" (click)="llamar911()">
+      <div class="sos-pulse">
+        <div class="sos-circle">
+          <ion-icon name="call-outline"></ion-icon>
+        </div>
+      </div>
+      <h2>SOS</h2>
+      <p>Toca para llamar al 911</p>
+    </div>
+
+    <div class="emerg-section-label">ACCIONES RAPIDAS</div>
+
+    <div class="emerg-card red" (click)="llamar911()">
+      <div class="emerg-icon">
+        <ion-icon name="call-outline"></ion-icon>
+      </div>
+      <div class="emerg-info">
+        <h4>Llamar 911</h4>
+        <p>Emergencias nacionales</p>
+      </div>
+      <ion-icon name="call-outline" class="arrow-icon"></ion-icon>
+    </div>
+
+    <div class="emerg-card blue" (click)="llamarContacto()">
+      <div class="emerg-icon">
+        <ion-icon name="person-outline"></ion-icon>
+      </div>
+      <div class="emerg-info">
+        <h4>{{ contactoNombre || 'Contacto de emergencia' }}</h4>
+        <p>{{ contactoTelefono || 'Configura en tu perfil' }}</p>
+      </div>
+      <ion-icon name="call-outline" class="arrow-icon"></ion-icon>
+    </div>
+
+    <div class="emerg-card green" (click)="buscarHospitales()">
+      <div class="emerg-icon">
+        <ion-icon name="location-outline"></ion-icon>
+      </div>
+      <div class="emerg-info">
+        <h4>Hospitales cercanos</h4>
+        <p>Ver en Google Maps</p>
+      </div>
+      <ion-icon name="location-outline" class="arrow-icon"></ion-icon>
+    </div>
+
+    <div class="info-card">
+      <ion-icon name="heart-outline"></ion-icon>
+      <p>En caso de emergencia medica grave llama al <strong>911</strong> o dirigete al hospital mas cercano</p>
+    </div>
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,133 @@
+.perfil-content { --background: #F8FAFC; }
+
+.perfil-header {
+  background: linear-gradient(90deg, #0D3B8E, #1E5BB8);
+  padding: 50px 16px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+  h2 { font-size: 18px; font-weight: 700; color: white; margin: 0; }
+
+  .back-btn {
+    width: 34px; height: 34px; background: rgba(255,255,255,0.2);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; ion-icon { font-size: 20px; color: white; }
+  }
+
+  .save-btn {
+    width: 34px; height: 34px; background: rgba(255,255,255,0.2);
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; ion-icon { font-size: 20px; color: #7FDBF0; }
+  }
+}
+
+.perfil-body { padding: 16px; }
+
+.avatar-section {
+  text-align: center; padding: 20px 0 16px;
+  display: inline-flex; width: 100%; justify-content: center; align-items: center; gap: 14px;
+
+  .avatar-wrapper { position: relative; display: inline-block; }
+
+  .avatar-circle {
+    width: 72px; height: 72px; background: #0D3B8E; border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 30px; color: white;
+  }
+
+  .avatar-foto { width: 72px; height: 72px; border-radius: 20px; object-fit: cover; border: 2px solid #0FA3B1; }
+
+  .avatar-edit-btn {
+    position: absolute; bottom: -6px; right: -6px;
+    width: 26px; height: 26px; background: #0FA3B1; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    ion-icon { font-size: 14px; color: white; }
+  }
+
+  .blood-badge {
+    background: #FFEBEE; border: 1px solid #FFCDD2;
+    border-radius: 20px; padding: 6px 14px;
+    font-size: 14px; color: #D32F2F; font-weight: 700;
+  }
+}
+
+.section-card {
+  background: white; border: 1px solid #DDE3EA; border-radius: 16px;
+  padding: 16px; margin-bottom: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+
+  .card-title {
+    display: flex; align-items: center; gap: 8px; font-size: 13px;
+    font-weight: 700; color: #0D3B8E; margin-bottom: 14px;
+    ion-icon { font-size: 16px; color: #0FA3B1; }
+  }
+}
+
+.form-group {
+  margin-bottom: 12px;
+  label {
+    display: block; font-size: 11px; font-weight: 600; color: #64748B;
+    margin-bottom: 5px; padding-left: 4px;
+  }
+}
+
+.input-item {
+  --background: #F8FAFC; --border-radius: 10px; --color: #334155;
+  --placeholder-color: #94A3B8; --padding-start: 12px;
+  border-radius: 10px; border: 1.5px solid #DDE3EA;
+}
+
+.chips-row {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
+
+  .chip {
+    display: flex; align-items: center; gap: 5px; border-radius: 20px;
+    padding: 5px 10px; font-size: 12px; font-weight: 500; cursor: pointer;
+    ion-icon { font-size: 12px; opacity: 0.6; }
+    &.amber { background: #FFF3E0; border: 1px solid #FFE0B2; color: #FF9800; }
+    &.blue { background: #EDF5FF; border: 1px solid rgba(13,59,142,0.2); color: #0D3B8E; }
+  }
+}
+
+.add-row {
+  display: flex; gap: 8px; align-items: center;
+
+  .add-chip-btn {
+    width: 40px; height: 40px; background: #0D3B8E; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; flex-shrink: 0;
+    ion-icon { font-size: 20px; color: white; }
+  }
+}
+
+.btn-guardar {
+  background: linear-gradient(90deg, #0D3B8E, #1E5BB8); color: white;
+  border-radius: 14px; padding: 16px; text-align: center;
+  font-size: 16px; font-weight: 700; cursor: pointer;
+  margin-top: 8px; margin-bottom: 40px;
+}
+
+.native-date-inp {
+  width: 100%; display: block; box-sizing: border-box;
+  background: #F8FAFC; border: 1.5px solid #DDE3EA; border-radius: 10px;
+  padding: 11px 14px; color: #334155; font-size: 14px;
+  font-family: inherit; outline: none;
+  -webkit-appearance: none; appearance: none;
+  &:focus { border-color: #0D3B8E; }
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(28%) sepia(60%) saturate(600%) hue-rotate(195deg);
+    cursor: pointer;
+  }
+}
+
+.email-display {
+  background: #F8FAFC; border: 1.5px solid #DDE3EA; border-radius: 10px;
+  padding: 11px 14px; color: #64748B; font-size: 14px;
+}
+
+.vigente-row {
+  display: flex; align-items: center; gap: 10px; margin-top: 4px;
+  .vigente-label { font-size: 12px; color: #64748B; }
+  .vigente-badge {
+    padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;
+    background: #FFEBEE; color: #D32F2F; border: 1px solid #FFCDD2;
+    &.active { background: #E8F5E9; color: #2E7D32; border-color: #A5D6A7; }
+  }
+}

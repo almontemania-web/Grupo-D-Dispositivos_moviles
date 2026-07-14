@@ -1,0 +1,204 @@
+.login-content { --background: #EDF5FF; }
+
+// ── Hero claro ────────────────────────────────────────────────────────
+.login-hero {
+  background: linear-gradient(160deg, #EBF4FF 0%, #D6EDFF 50%, #E8F5FF 100%);
+  min-height: 270px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 52px 24px 24px;
+  overflow: hidden;
+
+  .hero-circle {
+    position: absolute; border-radius: 50%;
+    &.hero-circle-1 {
+      width: 220px; height: 220px;
+      background: rgba(15,163,177,0.08);
+      top: -80px; right: -60px;
+    }
+    &.hero-circle-2 {
+      width: 160px; height: 160px;
+      background: rgba(13,59,142,0.07);
+      bottom: -50px; left: -40px;
+    }
+  }
+
+  .hero-float {
+    position: absolute; font-size: 22px; opacity: 0.45;
+    &.f1 { top: 60px; left: 20px; transform: rotate(-15deg); }
+    &.f2 { top: 40px; right: 30px; transform: rotate(10deg); }
+    &.f3 { bottom: 55px; left: 35px; transform: rotate(8deg); }
+    &.f4 { bottom: 40px; right: 20px; transform: rotate(-12deg); }
+  }
+
+  .hero-center {
+    text-align: center; position: relative; z-index: 1;
+  }
+}
+
+.hero-logo-box {
+  position: relative; width: 88px; height: 88px; margin: 0 auto 14px;
+
+  .logo-ring {
+    position: absolute; inset: 0; border-radius: 26px;
+    background: white; box-shadow: 0 8px 28px rgba(13,59,142,0.18);
+  }
+
+  .logo-main-icon {
+    position: absolute; inset: 0; display: flex; align-items: center;
+    justify-content: center; font-size: 42px; z-index: 2;
+  }
+
+  .logo-badge {
+    position: absolute; bottom: -4px; right: -4px;
+    font-size: 18px; z-index: 3;
+    background: white; border-radius: 50%; width: 26px; height: 26px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+}
+
+.hero-brand {
+  font-size: 30px; font-weight: 800; color: #0D3B8E; margin: 0 0 6px;
+  span { color: #0FA3B1; }
+}
+
+.hero-ekg {
+  display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 8px;
+  .ekg-bar { flex: 1; max-width: 60px; height: 1.5px; background: #0FA3B1; opacity: 0.5; }
+  .ekg-icon { font-size: 16px; color: #0FA3B1; }
+}
+
+.hero-sub { font-size: 12px; color: #64748B; margin: 0; line-height: 1.5; }
+
+// ── Sheet ─────────────────────────────────────────────────────────────
+.login-sheet {
+  background: white;
+  border-radius: 28px 28px 0 0;
+  margin-top: -24px;
+  padding: 18px 24px 48px;
+  min-height: calc(100vh - 246px);
+  position: relative; z-index: 2;
+
+  .sheet-handle {
+    width: 40px; height: 4px;
+    background: #DDE3EA; border-radius: 2px;
+    margin: 0 auto 20px;
+  }
+
+  h2 { font-size: 22px; font-weight: 700; color: #334155; margin: 0 0 4px; }
+  .sheet-sub { font-size: 14px; color: #64748B; margin: 0 0 22px; }
+}
+
+// ── Campos ─────────────────────────────────────────────────────────────
+.form-field {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+
+  .field-icon {
+    font-size: 20px; width: 40px; height: 40px;
+    background: #EDF5FF; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+
+  .input-item {
+    flex: 1;
+    --background: #F8FAFC; --border-radius: 12px;
+    --color: #334155; --placeholder-color: #94A3B8;
+    --padding-start: 14px;
+    border-radius: 12px; border: 1.5px solid #DDE3EA;
+  }
+
+  .eye-icon { color: #64748B; font-size: 20px; cursor: pointer; }
+}
+
+// ── Recordarme ─────────────────────────────────────────────────────────
+.remember-row {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+
+  .remember-label {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13px; color: #334155; cursor: pointer;
+    input { accent-color: #0D3B8E; }
+  }
+
+  .forgot-link { font-size: 13px; color: #0D3B8E; font-weight: 600; cursor: pointer; }
+}
+
+// ── Botón ──────────────────────────────────────────────────────────────
+.btn-login {
+  --background: #0D3B8E; --border-radius: 14px;
+  --color: white; height: 56px;
+  font-size: 15px; font-weight: 800; margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+// ── Social ─────────────────────────────────────────────────────────────
+.social-divider {
+  text-align: center; position: relative; margin-bottom: 16px;
+  &::before, &::after {
+    content: ''; position: absolute; top: 50%; width: 35%;
+    height: 1px; background: #DDE3EA;
+  }
+  &::before { left: 0; } &::after { right: 0; }
+  span { font-size: 13px; color: #94A3B8; background: white; padding: 0 10px; }
+}
+
+.social-btns {
+  display: flex; gap: 8px; margin-bottom: 18px;
+
+  .social-btn {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 11px 6px; border: 1.5px solid #DDE3EA; border-radius: 12px;
+    font-size: 12px; font-weight: 600; color: #334155; cursor: pointer;
+    background: white; outline: none; font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s, border-color 0.15s;
+
+    &:active { background: #F8FAFC; }
+
+    .s-logo { width: 20px; height: 20px; flex-shrink: 0; }
+
+    span { font-size: 12px; font-weight: 600; color: #334155; }
+
+    &.google { border-color: #DDE3EA; }
+    &.facebook { border-color: #DDE3EA; }
+    &.apple { border-color: #DDE3EA; }
+  }
+}
+
+// ── Adulto Mayor ───────────────────────────────────────────────────────
+.senior-mode-row {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #EDF5FF; border-radius: 14px; padding: 12px 14px; margin-bottom: 20px;
+
+  .senior-info { display: flex; align-items: center; gap: 10px; }
+
+  .senior-icon {
+    width: 40px; height: 40px; background: #0D3B8E; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: white; flex-shrink: 0;
+  }
+
+  .senior-title { font-size: 13px; font-weight: 700; color: #0D3B8E; margin: 0; }
+  .senior-sub { font-size: 11px; color: #64748B; margin: 0; }
+
+  .senior-toggle {
+    width: 46px; height: 26px; background: #0FA3B1; border-radius: 13px;
+    position: relative; flex-shrink: 0;
+    &::after {
+      content: ''; position: absolute; right: 3px; top: 3px;
+      width: 20px; height: 20px; background: white; border-radius: 50%;
+    }
+  }
+}
+
+// ── Registro ───────────────────────────────────────────────────────────
+.register-row {
+  text-align: center; font-size: 14px; color: #64748B;
+
+  .register-link {
+    display: inline-flex; align-items: center; gap: 5px;
+    color: #0D3B8E; font-weight: 800; cursor: pointer; margin-left: 4px;
+    ion-icon { font-size: 16px; }
+  }
+}

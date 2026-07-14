@@ -1,0 +1,117 @@
+<ion-content class="salud-content">
+
+  <div class="salud-header">
+    <div class="back-btn" (click)="volverHome()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>Control de Salud</h2>
+    <div class="add-btn" (click)="mostrarForm = !mostrarForm">
+      <ion-icon name="add-outline"></ion-icon>
+    </div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab-btn" [class.active]="tabActivo === 'presion'" (click)="cambiarTab('presion')">
+      <ion-icon name="heart-outline"></ion-icon>
+      Presión arterial
+    </div>
+    <div class="tab-btn" [class.active]="tabActivo === 'glucosa'" (click)="cambiarTab('glucosa')">
+      <ion-icon name="water-outline"></ion-icon>
+      Glucosa
+    </div>
+  </div>
+
+  <div class="ultima-medicion" *ngIf="getUltimaMedicion()">
+    <div class="ultima-label">Última medición</div>
+    <div class="ultima-valor" *ngIf="tabActivo === 'presion'">
+      <span class="valor-big">{{ getUltimaMedicion()?.valor1 }}/{{ getUltimaMedicion()?.valor2 }}</span>
+      <span class="valor-unit">mmHg</span>
+    </div>
+    <div class="ultima-valor" *ngIf="tabActivo === 'glucosa'">
+      <span class="valor-big">{{ getUltimaMedicion()?.valor1 }}</span>
+      <span class="valor-unit">mg/dL</span>
+    </div>
+    <div class="ultima-estado"
+      [style.background]="getEstadoColor(getUltimaMedicion()?.estado || '') + '22'"
+      [style.color]="getEstadoColor(getUltimaMedicion()?.estado || '')">
+      {{ getEstadoLabel(getUltimaMedicion()?.estado || '') }}
+    </div>
+    <div class="ultima-fecha">{{ getFecha(getUltimaMedicion()?.fecha) }}</div>
+  </div>
+
+  <div class="form-nueva" *ngIf="mostrarForm">
+    <div class="form-title">Nueva medición</div>
+
+    <div *ngIf="tabActivo === 'presion'">
+      <div class="form-row">
+        <div class="form-group half">
+          <label>Sistólica</label>
+          <input class="inp" type="number" placeholder="120" [(ngModel)]="sistolica"/>
+        </div>
+        <div class="form-group half">
+          <label>Diastólica</label>
+          <input class="inp" type="number" placeholder="80" [(ngModel)]="diastolica"/>
+        </div>
+      </div>
+      <div class="presion-preview" *ngIf="sistolica && diastolica">
+        Estado:
+        <strong [style.color]="getEstadoColor(getEstadoPresion(sistolica, diastolica))">
+          {{ getEstadoLabel(getEstadoPresion(sistolica, diastolica)) }}
+        </strong>
+      </div>
+    </div>
+
+    <div *ngIf="tabActivo === 'glucosa'">
+      <div class="form-group">
+        <label>Glucosa (mg/dL)</label>
+        <input class="inp" type="number" placeholder="100" [(ngModel)]="glucosa"/>
+      </div>
+      <div class="presion-preview" *ngIf="glucosa">
+        Estado:
+        <strong [style.color]="getEstadoColor(getEstadoGlucosa(glucosa))">
+          {{ getEstadoLabel(getEstadoGlucosa(glucosa)) }}
+        </strong>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Nota (opcional)</label>
+      <input class="inp" placeholder="Ej: En ayunas, después de ejercicio..." [(ngModel)]="nota"/>
+    </div>
+
+    <div class="btn-guardar" (click)="guardar()">Guardar medición</div>
+  </div>
+
+  <div class="mediciones-lista">
+    <div class="lista-titulo">Historial</div>
+
+    <div class="empty-state" *ngIf="!cargando && mediciones.length === 0">
+      <ion-icon name="pulse-outline"></ion-icon>
+      <p>Sin mediciones registradas</p>
+      <span>Toca el + para agregar</span>
+    </div>
+
+    <div class="medicion-item" *ngFor="let med of mediciones">
+      <div class="med-valor-col">
+        <span class="med-valor" *ngIf="med.tipo === 'presion'">
+          {{ med.valor1 }}/{{ med.valor2 }}
+        </span>
+        <span class="med-valor" *ngIf="med.tipo === 'glucosa'">
+          {{ med.valor1 }}
+        </span>
+        <span class="med-unit" *ngIf="med.tipo === 'presion'">mmHg</span>
+        <span class="med-unit" *ngIf="med.tipo === 'glucosa'">mg/dL</span>
+      </div>
+      <div class="med-info">
+        <div class="med-estado-badge"
+          [style.background]="getEstadoColor(med.estado) + '22'"
+          [style.color]="getEstadoColor(med.estado)">
+          {{ getEstadoLabel(med.estado) }}
+        </div>
+        <p class="med-fecha">{{ getFecha(med.fecha) }}</p>
+        <p class="med-nota" *ngIf="med.nota">{{ med.nota }}</p>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

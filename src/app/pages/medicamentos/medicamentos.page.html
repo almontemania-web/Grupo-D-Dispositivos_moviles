@@ -1,0 +1,68 @@
+<ion-content class="meds-content">
+
+  <div class="meds-header">
+    <div class="back-btn" (click)="volverHome()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>Medicamentos</h2>
+    <div class="add-btn" (click)="irAgregar()">
+      <ion-icon name="add-outline"></ion-icon>
+    </div>
+  </div>
+
+  <div class="meds-body">
+
+    <div class="loading-state" *ngIf="cargando">
+      <p>Cargando medicamentos...</p>
+    </div>
+
+    <div class="empty-state" *ngIf="!cargando && medicamentos.length === 0">
+      <ion-icon name="pills-outline"></ion-icon>
+      <h3>Sin medicamentos</h3>
+      <p>Agrega tu primer medicamento tocando el botón +</p>
+      <div class="btn-agregar" (click)="irAgregar()">
+        <ion-icon name="add-outline"></ion-icon>
+        Agregar medicamento
+      </div>
+    </div>
+
+    <div class="med-card" *ngFor="let med of medicamentos" [class.inactivo]="!med.activo">
+      <div class="med-card-top">
+        <div class="med-icon-sq" [style.background]="getColorCategoria(med.categoria) + '22'">
+          <ion-icon [name]="getIconoCategoria(med.categoria)" [style.color]="getColorCategoria(med.categoria)"></ion-icon>
+        </div>
+        <div class="med-info">
+          <h4>{{ med.nombre }}</h4>
+          <p>{{ med.dosis }} · {{ med.categoria }}</p>
+        </div>
+        <div class="med-status" [class.activo]="med.activo" (click)="toggleMedicamento(med)">
+          {{ med.activo ? 'Activo' : 'Pausado' }}
+        </div>
+      </div>
+
+      <div class="med-tags">
+        <div class="tag" *ngFor="let h of med.horarios">
+          <ion-icon name="time-outline"></ion-icon>
+          {{ h }}
+        </div>
+        <div class="tag">
+          <ion-icon name="calendar-outline"></ion-icon>
+          {{ med.duracionDias }} días
+        </div>
+      </div>
+
+      <div class="med-actions">
+        <div class="action-btn take" *ngIf="med.activo" (click)="marcarTomado(med)">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          Tomar
+        </div>
+        <div class="action-btn delete" (click)="confirmarEliminar(med)">
+          <ion-icon name="trash-outline"></ion-icon>
+          Eliminar
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

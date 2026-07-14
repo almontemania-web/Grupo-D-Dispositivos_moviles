@@ -1,33 +1,75 @@
 <ion-app>
-  <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
-      <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi&#64;ionicframework.com</ion-note>
 
-          @for (p of appPages; track p; let i = $index) {
-            <ion-menu-toggle auto-hide="false">
-              <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
-                <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-                <ion-label>{{ p.title }}</ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-          }
-        </ion-list>
+  <app-network-banner></app-network-banner>
 
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
+  <ion-menu contentId="main-content" side="start" type="push" menuId="main-menu" [swipeGesture]="false">
 
-          @for (label of labels; track label) {
-            <ion-item lines="none">
-              <ion-icon aria-hidden="true" slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-              <ion-label>{{ label }}</ion-label>
-            </ion-item>
-          }
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
-  </ion-split-pane>
+    <ion-header>
+      <ion-toolbar class="menu-toolbar">
+        <div class="menu-logo">
+          <div class="menu-logo-icon">
+            <ion-icon name="heart-outline"></ion-icon>
+          </div>
+          <div>
+            <div class="menu-logo-title">MedicAlert <span>RD</span></div>
+            <div class="menu-logo-sub">Tu seguridad médica</div>
+          </div>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="menu-content">
+
+      <div class="menu-user">
+        <div class="menu-avatar" *ngIf="!fotoUrl">
+          {{ nombreUsuario.charAt(0).toUpperCase() }}
+        </div>
+        <img *ngIf="fotoUrl" [src]="fotoUrl" class="menu-avatar-img" alt="Foto de perfil"/>
+        <div class="menu-user-info">
+          <h4>{{ nombreUsuario }}</h4>
+          <p>{{ emailUsuario || 'Ver perfil' }}</p>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="user-arrow" [routerLink]="'/perfil-medico'"></ion-icon>
+      </div>
+
+      <ion-list lines="none" class="menu-list">
+        <ion-menu-toggle *ngFor="let item of menuItems">
+          <ion-item button class="menu-item" [routerLink]="item.ruta">
+            <div class="menu-icon-wrap" slot="start"
+                 [style.background]="item.color + '18'"
+                 [style.border]="'1.5px solid ' + item.color + '40'">
+              <ion-icon [name]="item.icon" [style.color]="item.color"></ion-icon>
+            </div>
+            <ion-label class="menu-label">{{ item.label }}</ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end" class="chevron"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
+      <div class="menu-divider"></div>
+
+      <ion-menu-toggle>
+        <div class="menu-logout-btn" (click)="logout()">
+          <div class="logout-icon-wrap">
+            <ion-icon name="log-out-outline"></ion-icon>
+          </div>
+          <span>Cerrar sesión</span>
+        </div>
+      </ion-menu-toggle>
+
+      <div class="menu-sos" [routerLink]="'/emergencia'">
+        <div class="sos-icon-wrap">
+          <ion-icon name="call-outline"></ion-icon>
+        </div>
+        <div>
+          <div class="sos-title">SOS Emergencia</div>
+          <div class="sos-sub">Llamar al 911</div>
+        </div>
+      </div>
+
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+
 </ion-app>

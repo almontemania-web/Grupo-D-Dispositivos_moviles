@@ -1,0 +1,109 @@
+<ion-content class="agregar-content">
+
+  <div class="agregar-header">
+    <div class="back-btn" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>Agregar medicamento</h2>
+    <div style="width:34px"></div>
+  </div>
+
+  <div class="agregar-body">
+
+    <!-- ── Nombre con autocompletado ── -->
+    <div class="form-group">
+      <label>NOMBRE DEL MEDICAMENTO</label>
+      <div class="nombre-wrap">
+        <ion-icon name="medkit-outline" class="nombre-icon"></ion-icon>
+        <input
+          class="inp-nombre"
+          placeholder="Ej: Losartan, Metformina, Ibuprofeno..."
+          [(ngModel)]="nombre"
+          (ngModelChange)="filtrarMedicamentos()"
+          (blur)="ocultarSugerencias()"
+          autocomplete="off"/>
+
+        <div class="sugerencias-lista" *ngIf="sugerencias.length > 0">
+          <div class="sug-item" *ngFor="let m of sugerencias" (mousedown)="seleccionarMed(m)">
+            <div class="sug-info">
+              <span class="sug-nombre">{{ m.nombre }}</span>
+              <span class="sug-desc">{{ m.descripcion | slice:0:65 }}...</span>
+            </div>
+            <span class="sug-dosis">{{ m.dosis }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Notas (para qué sirve) ── -->
+    <div class="form-group">
+      <label>PARA QUÉ SIRVE / NOTAS</label>
+      <textarea
+        class="inp-notas"
+        placeholder="Se llena automáticamente al seleccionar de la lista. Puedes agregar tus propias notas."
+        [(ngModel)]="notas"
+        rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>DOSIS</label>
+      <ion-item lines="none" class="input-item">
+        <ion-input placeholder="Ej: 50mg, 10mg, 1 tableta" [(ngModel)]="dosis"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="form-group">
+      <label>CATEGORÍA</label>
+      <ion-item lines="none" class="input-item">
+        <ion-select [(ngModel)]="categoria" interface="popover">
+          <ion-select-option *ngFor="let c of categorias" [value]="c.valor">
+            {{ c.label }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div class="form-group">
+      <label>FRECUENCIA</label>
+      <ion-item lines="none" class="input-item">
+        <ion-select [(ngModel)]="frecuencia" interface="popover">
+          <ion-select-option *ngFor="let f of frecuencias" [value]="f.valor">
+            {{ f.label }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div class="form-group">
+      <label>DURACIÓN (DÍAS)</label>
+      <ion-item lines="none" class="input-item">
+        <ion-input type="number" placeholder="30" [(ngModel)]="duracionDias"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="form-group">
+      <label>HORARIOS DE DOSIS</label>
+      <div class="horarios-list">
+        <div class="horario-chip" *ngFor="let h of horarios">
+          <ion-icon name="time-outline"></ion-icon>
+          {{ h }}
+          <ion-icon name="trash-outline" class="del" (click)="eliminarHorario(h)"></ion-icon>
+        </div>
+      </div>
+      <div class="add-horario-row">
+        <ion-item lines="none" class="input-item time-input">
+          <ion-input type="time" [(ngModel)]="nuevoHorario"></ion-input>
+        </ion-item>
+        <div class="add-hora-btn" (click)="agregarHorario()">
+          <ion-icon name="add-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-guardar" (click)="guardar()">
+      Guardar medicamento
+    </div>
+
+  </div>
+
+</ion-content>

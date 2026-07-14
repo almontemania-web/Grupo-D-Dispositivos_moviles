@@ -1,0 +1,91 @@
+<ion-content class="qr-content">
+
+  <div class="qr-header">
+    <div class="back-btn" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>Escanear QR de medicamento</h2>
+  </div>
+
+  <div class="qr-body">
+
+    <div class="ia-badge">
+      <ion-icon name="qr-code-outline"></ion-icon>
+      Consulta en tiempo real (API REST)
+    </div>
+
+    <!-- Estado inicial / botón de escaneo -->
+    <div class="scan-zone" *ngIf="!codigoLeido" (click)="escanear()">
+      <div class="scan-icon">
+        <ion-icon name="qr-code-outline"></ion-icon>
+      </div>
+      <h3>Escanea el código QR</h3>
+      <p>Apunta la cámara al código QR impreso en la caja o etiqueta del medicamento</p>
+      <div class="scan-btn">
+        <ion-icon name="flash-outline"></ion-icon>
+        Iniciar escaneo
+      </div>
+    </div>
+
+    <!-- Resultado -->
+    <div class="resultado-zone" *ngIf="codigoLeido">
+
+      <div class="codigo-leido">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <span>{{ codigoLeido }}</span>
+      </div>
+
+      <div class="med-info-card" *ngIf="infoMedicamento">
+        <h4>{{ infoMedicamento.nombreComercial }}</h4>
+        <p class="generico">{{ infoMedicamento.nombreGenerico }} · {{ infoMedicamento.fabricante }}</p>
+
+        <div class="info-row">
+          <span class="info-label">Propósito</span>
+          <p>{{ infoMedicamento.proposito }}</p>
+        </div>
+        <div class="info-row">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <span class="info-label">Advertencias</span>
+          <p>{{ infoMedicamento.advertencias }}</p>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Dosis sugerida</span>
+          <p>{{ infoMedicamento.dosisSugerida }}</p>
+        </div>
+      </div>
+
+      <div class="sin-info" *ngIf="!infoMedicamento && !buscoInfo">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+        <p>No se encontró información pública para este código. El escaneo quedó guardado en tu historial.</p>
+      </div>
+
+      <div class="btn-nuevo" (click)="nuevoEscaneo()">
+        <ion-icon name="qr-code-outline"></ion-icon>
+        Escanear otro código
+      </div>
+    </div>
+
+    <!-- Historial de escaneos -->
+    <div class="historial-section" *ngIf="historial.length > 0">
+      <div class="historial-title-row">
+        <h4>Historial de escaneos</h4>
+        <ion-icon name="trash-outline" class="clear-icon" (click)="limpiarHistorial()"></ion-icon>
+      </div>
+
+      <div class="hist-item" *ngFor="let h of historial">
+        <div class="hist-icon">
+          <ion-icon name="medkit-outline"></ion-icon>
+        </div>
+        <div class="hist-info">
+          <span class="hist-nombre">{{ h.info?.nombreComercial || h.codigoQr }}</span>
+          <span class="hist-fecha">
+            <ion-icon name="time-outline"></ion-icon>
+            {{ h.fecha | date:'d MMM, h:mm a' }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

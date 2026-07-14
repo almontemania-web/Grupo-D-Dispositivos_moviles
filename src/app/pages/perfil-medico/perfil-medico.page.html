@@ -1,0 +1,198 @@
+<ion-content class="perfil-content">
+
+  <div class="perfil-header">
+    <div class="back-btn" (click)="volverHome()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>Perfil médico</h2>
+    <div class="save-btn" (click)="guardar()">
+      <ion-icon name="save-outline"></ion-icon>
+    </div>
+  </div>
+
+  <div class="perfil-body" *ngIf="!cargando">
+
+    <div class="avatar-section">
+      <div class="avatar-wrapper">
+        <div class="avatar-circle" *ngIf="!fotoUrl">
+          {{ perfil?.nombre ? perfil.nombre.charAt(0).toUpperCase() : 'U' }}
+        </div>
+        <img *ngIf="fotoUrl" [src]="fotoUrl" class="avatar-foto" alt="Foto de perfil"/>
+        <label class="avatar-edit-btn" for="foto-input">
+          <ion-icon name="camera-outline"></ion-icon>
+        </label>
+        <input id="foto-input" type="file" accept="image/*"
+               style="display:none" (change)="seleccionarFoto($event)"/>
+      </div>
+      <div class="blood-badge">{{ perfil?.tipoSanguineo }}</div>
+    </div>
+
+    <!-- ── Datos de registro ── -->
+    <div class="section-card">
+      <div class="card-title">
+        <ion-icon name="id-card-outline"></ion-icon>
+        Datos de registro
+      </div>
+
+      <div class="form-group">
+        <label>Nombre</label>
+        <ion-item lines="none" class="input-item">
+          <ion-input placeholder="Tu nombre" [(ngModel)]="perfil.nombre"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="form-group">
+        <label>Apellido</label>
+        <ion-item lines="none" class="input-item">
+          <ion-input placeholder="Tu apellido" [(ngModel)]="apellido"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <div class="email-display">{{ email || 'Sin correo registrado' }}</div>
+      </div>
+
+      <div class="form-group">
+        <label>Fecha de nacimiento</label>
+        <input
+          type="date"
+          class="native-date-inp"
+          [(ngModel)]="fechaNacimiento"
+          [max]="maxFecha" />
+      </div>
+
+      <div class="vigente-row">
+        <span class="vigente-label">Estado del plan:</span>
+        <span class="vigente-badge" [class.active]="vigente">
+          {{ vigente ? 'Vigente' : 'No vigente' }}
+        </span>
+      </div>
+    </div>
+
+    <!-- ── Seguro médico ── -->
+    <div class="section-card">
+      <div class="card-title">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+        Seguro médico
+      </div>
+
+      <div class="form-group">
+        <label>Plan de salud / ARS</label>
+        <ion-item lines="none" class="input-item">
+          <ion-select placeholder="Seleccionar plan" [(ngModel)]="planSalud"
+            interface="action-sheet" cancelText="Cancelar">
+            <ion-select-option *ngFor="let p of planesARS" [value]="p">{{ p }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div class="form-group">
+        <label>No. Afiliado / Carnet</label>
+        <ion-item lines="none" class="input-item">
+          <ion-input placeholder="Número de afiliado" [(ngModel)]="noAfiliado"></ion-input>
+        </ion-item>
+      </div>
+    </div>
+
+    <!-- ── Información médica ── -->
+    <div class="section-card">
+      <div class="card-title">
+        <ion-icon name="person-outline"></ion-icon>
+        Información médica
+      </div>
+
+      <div class="form-group">
+        <label>Edad</label>
+        <ion-item lines="none" class="input-item">
+          <ion-input type="number" placeholder="Edad" [(ngModel)]="perfil.edad"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="form-group">
+        <label>Teléfono</label>
+        <ion-item lines="none" class="input-item">
+          <ion-input type="tel" placeholder="809-000-0000" [(ngModel)]="perfil.telefono"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="form-group">
+        <label>Tipo sanguíneo</label>
+        <ion-item lines="none" class="input-item">
+          <ion-select [(ngModel)]="perfil.tipoSanguineo" interface="popover">
+            <ion-select-option *ngFor="let t of tiposSanguineos" [value]="t">{{ t }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="card-title">
+        <ion-icon name="medkit-outline"></ion-icon>
+        Alergias
+      </div>
+      <div class="chips-row">
+        <div class="chip amber" *ngFor="let a of perfil.alergias; let i = index">
+          {{ a }}
+          <ion-icon name="trash-outline" (click)="eliminarAlergia(i)"></ion-icon>
+        </div>
+      </div>
+      <div class="add-row">
+        <ion-item lines="none" class="input-item" style="flex:1">
+          <ion-input placeholder="Agregar alergia" [(ngModel)]="nuevaAlergia"></ion-input>
+        </ion-item>
+        <div class="add-chip-btn" (click)="agregarAlergia()">
+          <ion-icon name="add-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="card-title">
+        <ion-icon name="heart-outline"></ion-icon>
+        Condiciones médicas
+      </div>
+      <div class="chips-row">
+        <div class="chip blue" *ngFor="let e of perfil.enfermedades; let i = index">
+          {{ e }}
+          <ion-icon name="trash-outline" (click)="eliminarEnfermedad(i)"></ion-icon>
+        </div>
+      </div>
+      <div class="add-row">
+        <ion-item lines="none" class="input-item" style="flex:1">
+          <ion-input placeholder="Ej: Hipertensión" [(ngModel)]="nuevaEnfermedad"></ion-input>
+        </ion-item>
+        <div class="add-chip-btn" (click)="agregarEnfermedad()">
+          <ion-icon name="add-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <div class="card-title">
+        <ion-icon name="call-outline"></ion-icon>
+        Contacto de emergencia
+      </div>
+      <div class="form-group">
+        <label>Nombre</label>
+        <ion-item lines="none" class="input-item">
+          <ion-input placeholder="Nombre del contacto"
+            [(ngModel)]="perfil.contactoEmergenciaNombre"></ion-input>
+        </ion-item>
+      </div>
+      <div class="form-group">
+        <label>Teléfono</label>
+        <ion-item lines="none" class="input-item">
+          <ion-input type="tel" placeholder="809-000-0000"
+            [(ngModel)]="perfil.contactoEmergenciaTelefono"></ion-input>
+        </ion-item>
+      </div>
+    </div>
+
+    <div class="btn-guardar" (click)="guardar()">
+      Guardar perfil médico
+    </div>
+
+  </div>
+
+</ion-content>

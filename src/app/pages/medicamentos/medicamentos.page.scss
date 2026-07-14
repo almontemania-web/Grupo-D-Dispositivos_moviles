@@ -1,0 +1,93 @@
+.meds-content { --background: #F8FAFC; }
+
+.meds-header {
+  background: linear-gradient(90deg, #0D3B8E, #1E5BB8);
+  padding: 50px 16px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+
+  h2 { font-size: 18px; font-weight: 700; color: white; margin: 0; flex: 1; text-align: center; }
+
+  .back-btn {
+    width: 34px; height: 34px; background: rgba(255,255,255,0.2); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    ion-icon { font-size: 20px; color: white; }
+  }
+
+  .add-btn {
+    width: 34px; height: 34px; background: #4CAF50; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    ion-icon { font-size: 20px; color: white; }
+  }
+}
+
+.meds-body { padding: 14px; }
+
+.med-card {
+  background: white; border: 1px solid #DDE3EA; border-radius: 16px;
+  padding: 16px; margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+
+  &.inactivo { opacity: 0.5; }
+
+  .med-card-top {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+
+    .med-icon-sq {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; ion-icon { font-size: 22px; }
+    }
+
+    .med-info { flex: 1; }
+    .med-info h4 { font-size: 15px; color: #334155; font-weight: 700; margin: 0; }
+    .med-info .sub { font-size: 12px; color: #64748B; margin: 2px 0 0; }
+
+    .med-status {
+      font-size: 11px; font-weight: 700; padding: 4px 10px;
+      border-radius: 20px; cursor: pointer;
+      background: #F1F5F9; color: #64748B;
+      &.activo { background: #E8F5E9; color: #4CAF50; }
+    }
+  }
+
+  .med-tags {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;
+
+    .tag {
+      display: flex; align-items: center; gap: 4px; background: #F8FAFC;
+      border: 1px solid #DDE3EA; border-radius: 20px; padding: 4px 10px;
+      font-size: 11px; color: #64748B; ion-icon { font-size: 12px; }
+    }
+
+    .active-tag { background: #EDF5FF; border-color: rgba(13,59,142,0.2); color: #0D3B8E; }
+  }
+
+  .med-actions {
+    display: flex; gap: 8px; border-top: 1px solid #F1F5F9; padding-top: 10px;
+
+    .action-btn {
+      display: flex; align-items: center; gap: 4px;
+      padding: 7px 14px; border-radius: 10px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      ion-icon { font-size: 15px; }
+      &.delete { background: #FFEBEE; color: #D32F2F; border: 1px solid #FFCDD2; }
+      &.take {
+        background: #E8F5E9; color: #4CAF50; border: 1px solid #C8E6C9;
+        flex: 1; justify-content: center;
+      }
+    }
+  }
+}
+
+.empty-state, .loading-state {
+  text-align: center; padding: 60px 20px;
+  ion-icon { font-size: 56px; color: #DDE3EA; display: block; margin: 0 auto 16px; }
+  h3 { font-size: 18px; color: #64748B; font-weight: 600; margin: 0 0 8px; }
+  p { font-size: 13px; color: #94A3B8; margin: 0 0 24px; }
+
+  .btn-agregar {
+    display: inline-flex; align-items: center; gap: 6px; background: #4CAF50;
+    color: white; padding: 12px 24px; border-radius: 12px; font-weight: 700;
+    font-size: 14px; cursor: pointer;
+  }
+}

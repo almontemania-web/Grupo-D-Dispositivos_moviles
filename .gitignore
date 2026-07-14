@@ -68,3 +68,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Debug/test scripts and screenshots dropped at repo root during development
+/*.mjs
+/*.png

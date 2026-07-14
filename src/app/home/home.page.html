@@ -1,0 +1,82 @@
+<ion-content class="home-content">
+
+  <div class="home-header">
+    <ion-menu-button class="menu-btn" color="light"></ion-menu-button>
+    <div class="header-center">
+      <p class="greeting-sub">{{ saludo }},</p>
+      <h2 class="greeting-name">{{ nombreUsuario }} 👋</h2>
+    </div>
+    <div class="header-avatar">
+      <img *ngIf="fotoUrl" [src]="fotoUrl" class="avatar-img"/>
+      <div *ngIf="!fotoUrl" class="avatar-circle">{{ nombreUsuario.charAt(0).toUpperCase() }}</div>
+    </div>
+  </div>
+
+  <div class="home-body">
+
+    <div class="card-item med-card" (click)="irA('medicamentos')">
+      <div class="card-icon med">💊</div>
+      <div class="card-info">
+        <p class="card-label">Proximo medicamento</p>
+        <h4 class="card-title">{{ proximasDosis[0]?.nombre || 'Sin medicamentos' }}</h4>
+        <p class="card-sub">{{ proximasDosis[0]?.dosis }} · {{ getProximaHora() }}</p>
+      </div>
+      <div class="card-action" *ngIf="proximasDosis.length > 0">
+        <span class="tomar-btn">Tomar ahora</span>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="card-arrow"></ion-icon>
+    </div>
+
+    <div class="card-item cita-card" (click)="irA('citas')">
+      <div class="card-icon cita">📅</div>
+      <div class="card-info">
+        <p class="card-label">Proxima cita</p>
+        <h4 class="card-title">Ver mis citas medicas</h4>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="card-arrow"></ion-icon>
+    </div>
+
+    <div class="card-item record-card" (click)="irA('historial')">
+      <div class="card-icon record">🔔</div>
+      <div class="card-info">
+        <p class="card-label">Recordatorios</p>
+        <h4 class="card-title">Ver historial medico</h4>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="card-arrow"></ion-icon>
+    </div>
+
+    <div class="card-item emerg-card" (click)="llamarEmergencia()">
+      <div class="card-icon emerg">🚨</div>
+      <div class="card-info">
+        <p class="card-label">Emergencia</p>
+        <h4 class="card-title">Contactos y clinicas de emergencia</h4>
+      </div>
+      <ion-icon name="chevron-forward-outline" class="card-arrow"></ion-icon>
+    </div>
+
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item active" (click)="irA('home')">
+      <ion-icon name="home-outline"></ion-icon>
+      <span>Inicio</span>
+    </div>
+    <div class="nav-item" (click)="irA('medicamentos')">
+      <ion-icon name="medkit-outline"></ion-icon>
+      <span>Medicamentos</span>
+    </div>
+    <div class="nav-item" (click)="irA('citas')">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>Citas</span>
+    </div>
+    <div class="nav-item emerg" (click)="irA('emergencia')">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <span>Emergencia</span>
+    </div>
+    <div class="nav-item" (click)="irA('perfil-medico')">
+      <ion-icon name="person-outline"></ion-icon>
+      <span>Perfil</span>
+    </div>
+  </div>
+
+</ion-content>

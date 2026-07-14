@@ -1,0 +1,26 @@
+<ion-content class="mm-content">
+
+  <div class="mm-header">
+    <div class="back-btn" (click)="volver()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </div>
+    <h2>Video demostrativo</h2>
+  </div>
+
+  <div class="mm-body">
+
+    <p class="mm-sub">Mira cómo funciona MedicAlert RD, desde el registro de medicamentos hasta las alertas de emergencia.</p>
+
+    <div class="video-wrap" *ngIf="videoDisponible">
+      <video [src]="videoUrl" controls playsinline preload="metadata"></video>
+    </div>
+
+    <div class="video-placeholder" *ngIf="!videoDisponible">
+      <ion-icon name="videocam-off-outline"></ion-icon>
+      <h3>Video aún no disponible</h3>
+      <p>Coloca el archivo del video en <code>src/assets/video/demo-app.mp4</code> y aparecerá reproducible aquí automáticamente.</p>
+    </div>
+
+  </div>
+
+</ion-content>
